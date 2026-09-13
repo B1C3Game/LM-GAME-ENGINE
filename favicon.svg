@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- Background -->
+  <rect width="256" height="256" fill="#0a0e27"/>
+  
+  <!-- Stylized game piece with conversation elements -->
+  <!-- Left chat bubble -->
+  <path d="M 50 80 L 80 80 L 80 110 L 95 110 L 85 120 L 85 130 Q 85 140 75 140 L 55 140 Q 45 140 45 130 L 45 90 Q 45 80 55 80 Z" 
+        fill="none" stroke="#00d4ff" stroke-width="3" stroke-linejoin="round"/>
+  
+  <!-- Right chat bubble (offset, overlapping) -->
+  <path d="M 130 110 L 160 110 L 160 140 L 175 140 L 165 150 L 165 160 Q 165 170 155 170 L 135 170 Q 125 170 125 160 L 125 120 Q 125 110 135 110 Z" 
+        fill="none" stroke="#00d4ff" stroke-width="3" stroke-linejoin="round"/>
+  
+  <!-- Dice dot pattern inside (representing chance/game) -->
+  <circle cx="65" cy="105" r="3" fill="#00d4ff"/>
+  <circle cx="145" cy="130" r="3" fill="#00d4ff"/>
+  <circle cx="150" cy="125" r="3" fill="#00d4ff"/>
+  <circle cx="150" cy="135" r="3" fill="#00d4ff"/>
+</svg>
