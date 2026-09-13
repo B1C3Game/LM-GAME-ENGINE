@@ -34,6 +34,14 @@ No registration. No waiting. No installation.
 
 ---
 
+## Before You Play
+
+**Read this first:** [Player's Guide: What You're Actually Playing](PLAYER-TRUTH.md)
+
+LLMs are great at conversation and improvisation, but they're not deterministic game engines. This guide covers what to expect, what can go wrong, and how to handle it. It's short, honest, and written for players—not engineers.
+
+---
+
 ## What's Coming?
 
 Check [games/PIPELINE.md](games/PIPELINE.md) for games in development—like **Ghost**, the classical word game adapted for LLM refereeing. These have draft prompts and are awaiting player testing. Feedback and test runs move games from pipeline to verified.

@@ -2,6 +2,8 @@
 
 Welcome to LM-ENGINE. You're about to play a game that runs in a chat interface. No app. No account. Just you, another person, and an LLM referee.
 
+**First time?** Read [What You're Actually Playing](PLAYER-TRUTH.md) (5 minutes). It explains what LLMs are good at, what can go wrong, and how to handle it.
+
 ---
 
 ## The 5-Minute Setup
