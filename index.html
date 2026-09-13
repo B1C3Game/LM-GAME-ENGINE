@@ -197,13 +197,22 @@
             text-align: center;
         }
 
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn.copied {
+            background: linear-gradient(135deg, #10b981, #059669) !important;
+        }
+
         .btn-primary {
             background: linear-gradient(135deg, #00d4ff, #0099cc);
             color: #000;
             border: none;
         }
 
-        .btn-primary:hover {
+        .btn-primary:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 4px 16px rgba(0, 212, 255, 0.3);
         }
@@ -333,12 +342,43 @@
                             </div>
                         </div>
                         <div class="game-actions">
-                            <a href="${game.promptUrl}" class="btn btn-primary" download>Copy Prompt</a>
+                            <button class="btn btn-primary" data-copy="${game.promptUrl}">Copy Prompt</button>
                             <a href="${game.rulesUrl}" class="btn btn-secondary">Rules</a>
                         </div>
                     </div>
                 </div>
             `).join('');
+
+            // Add copy handlers
+            document.querySelectorAll('[data-copy]').forEach(button => {
+                button.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    const url = button.dataset.copy;
+                    try {
+                        const response = await fetch(url);
+                        const text = await response.text();
+                        await navigator.clipboard.writeText(text);
+                        
+                        // Show feedback
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        button.classList.add('copied');
+                        button.disabled = true;
+                        
+                        setTimeout(() => {
+                            button.textContent = originalText;
+                            button.classList.remove('copied');
+                            button.disabled = false;
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Failed to copy:', err);
+                        button.textContent = 'Copy failed';
+                        setTimeout(() => {
+                            button.textContent = 'Copy Prompt';
+                        }, 2000);
+                    }
+                });
+            });
         }
 
         document.addEventListener('DOMContentLoaded', renderGames);
