@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LM-GAME-ENGINE — Play Games in Your LLM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            background: linear-gradient(135deg, #00d4ff, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 0.85rem;
+            color: #888;
+            font-weight: 300;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #00d4ff;
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .game-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .game-card:hover {
+            border-color: rgba(0, 212, 255, 0.5);
+            background: rgba(30, 41, 59, 0.9);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.15);
+        }
+
+        .game-cover {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            background: #000;
+        }
+
+        .game-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .game-description {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .game-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            color: #666;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            margin-bottom: 0.2rem;
+        }
+
+        .meta-value {
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .game-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: #000;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #00d4ff;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: rgba(0, 212, 255, 0.6);
+        }
+
+        .info-section {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .info-section h2 {
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .info-section p {
+            color: #aaa;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div>
+                <div class="logo">LM-GAME-ENGINE</div>
+                <div class="tagline">Play games in your LLM. No downloads. No accounts.</div>
+            </div>
+            <nav class="nav">
+                <a href="#games">Browse Games</a>
+                <a href="https://github.com/B1C3Game/LM-GAME-ENGINE" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Games for Language Models</h1>
+            <p>Sophisticated games designed to run in chat. Copy a prompt. Invite a friend. Play instantly.</p>
+        </section>
+
+        <section id="games" class="games-grid">
+            <!-- Games load here -->
+        </section>
+
+        <section class="info-section">
+            <h2>How It Works</h2>
+            <p>Pick a game → Read the rules → Copy the master prompt → Paste into ChatGPT, Claude, or any LLM</p>
+            <p>Two players, one conversation. The LLM is the referee. That's it.</p>
+            <p style="margin-top: 1rem;"><a href="ONBOARDING.md" style="color: #00d4ff;">New to LM games? Read the guide →</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>LM-GAME-ENGINE © 2026 | A decentralized game platform</p>
+    </footer>
+
+    <script>
+        // Games data
+        const games = [
+            {
+                id: 'concept-drift',
+                title: 'Concept Drift',
+                description: 'Can you explain a concept so someone else can actually use it? The test is locked before you start explaining.',
+                image: 'games/concept-drift/83632fda-cdb7-406f-8e0e-c645cba1ba77.png',
+                players: '2',
+                time: '15–20 min',
+                promptUrl: 'games/concept-drift/GAME-MASTER-PROMPT.md',
+                rulesUrl: 'games/concept-drift/README.md'
+            }
+        ];
+
+        function renderGames() {
+            const container = document.querySelector('#games');
+            container.innerHTML = games.map(game => `
+                <div class="game-card">
+                    <img src="${game.image}" alt="${game.title}" class="game-cover">
+                    <div class="game-info">
+                        <h3 class="game-title">${game.title}</h3>
+                        <p class="game-description">${game.description}</p>
+                        <div class="game-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Players</span>
+                                <span class="meta-value">${game.players}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Time</span>
+                                <span class="meta-value">${game.time}</span>
+                            </div>
+                        </div>
+                        <div class="game-actions">
+                            <a href="${game.promptUrl}" class="btn btn-primary" download>Copy Prompt</a>
+                            <a href="${game.rulesUrl}" class="btn btn-secondary">Rules</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', renderGames);
+    </script>
+</body>
+</html>
