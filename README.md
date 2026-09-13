@@ -34,6 +34,12 @@ No registration. No waiting. No installation.
 
 ---
 
+## What's Coming?
+
+Check [games/PIPELINE.md](games/PIPELINE.md) for games in development—like **Ghost**, the classical word game adapted for LLM refereeing. These have draft prompts and are awaiting player testing. Feedback and test runs move games from pipeline to verified.
+
+---
+
 ## For Game Creators
 
 Want to build a new LM game?

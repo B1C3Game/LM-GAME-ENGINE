@@ -12,6 +12,18 @@ An LM game is a bounded, rule-based interaction designed to be orchestrated by a
 4. **State preservable in conversation** — The game state can be tracked through the chat history alone
 5. **Defined termination** — The game ends after N rounds or when a win/loss condition is met, not when players get bored
 
+## Design Philosophy
+
+All LM games should follow the principles outlined in [ChatGPT Online as a Game Master](DOCS/ChatGPTonline-GM.md), which establishes practical guidelines for how language models referee games. Key design practices:
+
+- **Keep state explicit and visible** — Maintain a canonical game state ledger within the chat, not buried in narration
+- **Make rulings falsifiable** — The LM should explain which facts led to each judgment, allowing players to challenge and appeal
+- **Protect player agency** — The LM should describe world consequences, not decide what players think, feel, or do
+- **Follow the turn sequence** — Read Intent → Validate → Resolve → Narrate → Update State → Prompt Next Action
+- **Provide recovery commands** — Offer `SAVE STATE`, `SHOW STATE`, and `UNDO LAST ROUND` so players can recover from errors
+
+These practices ensure that your game is not just mechanically sound, but also fair, transparent, and enjoyable to play.
+
 ## The Three Pillars
 
 ### 1. Rules (Specification)

@@ -21,12 +21,13 @@ One player explains a concept. The other tries to use it. The test is locked bef
 
 ---
 
-## Coming Soon
+## Pipeline (In Development)
 
-More games are in development:
+Games with master prompts drafted and awaiting player testing:
 
-- **[Name TBD]** — A negotiation game set in a future trade dispute
-- **[Name TBD]** — A mystery where you teach an LLM new reasoning patterns
+→ See [PIPELINE.md](PIPELINE.md) for games in progress, including **Ghost**, the classical word game adapted for LLM refereeing.
+
+Have a game idea or want to help test? Jump in—feedback moves games from pipeline to verified.
 
 ---
 
